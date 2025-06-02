@@ -1,0 +1,111 @@
+/* style.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f5f5;
+  }
+  
+  header {
+    background: #111;
+    color: white;
+    padding: 1rem 2rem;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  nav a {
+    color: white;
+    margin: 0 1rem;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 2rem;
+  }
+  
+  section {
+    margin-bottom: 4rem;
+  }
+  
+  .hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: #282c34;
+    color: white;
+  }
+  
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+  }
+  
+  .about, .projects, .contact {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  footer {
+    text-align: center;
+    padding: 2rem;
+    background: #111;
+    color: white;
+    font-size: 0.9rem;
+  }
+  
+  a.button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    background: #007acc;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  
+  a.button:hover {
+    background: #005f99;
+  }
+  
+  .project {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+  }
+  
+  .project h2 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .project p {
+    margin-bottom: 0.5rem;
+  }
+  
+  @media (max-width: 600px) {
+    .hero h1 {
+      font-size: 2rem;
+    }
+  }
+  
