@@ -98,6 +98,13 @@
   .project h2 {
     margin-bottom: 0.5rem;
   }
+
+  .project h5 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 1rem 0 0.5rem;
+    color: #555;
+  }
   
   .project p {
     margin-bottom: 0.5rem;
