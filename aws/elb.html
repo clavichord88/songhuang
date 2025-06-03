@@ -26,6 +26,16 @@
         <li>Classic Load Balancer (retired in 2023) - Layer 4 & 7</li>
       </ul>
     </div>
+
+    <div class="project">
+      <h2>Components for Load Balancer</h2>
+      <ul>
+        <li>Multiple EC2 instances, which are responsible for handling the requests from users</li>
+        <li>Then, we need to a load balancer and put the load balancer into a security group</li>
+        <li>Inside the security group, we need to have a target group to group the EC2 instances together, then the load balancer could point to the target group</li>
+      </ul>
+    </div>
+
   </main>
 
   <footer>
