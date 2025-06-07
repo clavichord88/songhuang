@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Song Huang | Auto Scaling Group </title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+  <h1>What is an Auto Scaling group</h1>
+  <main class="container">
+    <div class="project">
+      <h2>The Goal of an Auto Scaling Group (ASG)</h2>
+      <ul>
+        <li>Scale out (add EC2 instances) to match an increased load</li>
+        <li>Scale in (remove EC2 instances) to match a decreased load</li>
+        <li>Ensure we have a minimum and a maximum number of machines running</li>
+        <li>Automatically register new instances to a load balancer</li>
+        <li>Replace unhealthy instances</li>
+      </ul>
+      <p>Cost Savings: only run at an optimal capacity (principle of the cloud)</p>
+      <p>Create an Auto Scaling Group:</p>
+      <ul>
+        <li>create a launch template for the ASG</li>
+        <li>attach the ASG to a Load Balancer</li>
+    </div>
+
+    <div class="project">
+      <h2>Scaling Strategies</h2>
+      <ul>
+        <li>Manual Scaling: update the size of an ASG manually</li>
+        <li>Dynamic Scaling: 
+          <ul>
+            <li>Simple / Step Scaling</li>
+            <li>Target Tracking Scaling</li>
+            <li>Scheduled Scaling</li>
+          </ul>
+        </li>
+        <li>Predictive Scaling: </li>
+      </ul>
+      
+      </ul>
+    </div>
+
+
+  </main>
+
+  <footer>
+    &copy; 2025 Song Huang. All rights reserved.
+  </footer>
+
+</body>
+</html>
