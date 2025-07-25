@@ -109,6 +109,10 @@
   .project p {
     margin-bottom: 0.5rem;
   }
+
+  .project li {
+    text-indent: 4ch;
+  }
   
   @media (max-width: 600px) {
     .hero h1 {
