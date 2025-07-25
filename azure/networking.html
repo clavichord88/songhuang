@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Song Huang | Azure</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
 
@@ -17,54 +17,73 @@
   </header>
 
   <main class="container">
-    <h2>Core Services on Azure</h2>
+    <h2>Virtual Private Network</h2>
     <div class="project">
-      <h2>Azure Virtual Machines</h2>
-      <p>With Azure Virtual Machines (VMs), you can create and use VMs in the cloud. VMs provide infrastructure as a service (IaaS) in the form of a virtualized server and can be used in many ways. As an IaaS offering, you still need to configure, update, and maintain the software that runs on the VM. You can run single VMs for testing, development, or minor tasks. Or you can group VMs together to provide high availability, scalability, and redundancy. Azure can also manage the grouping of VMs for you with features such as scale sets and availability sets.
+      <h2>VPN</h2>
+      <p>A virtual private network (VPN) uses an encrypted tunnel within another network. VPNs are typically deployed to connect two or more trusted private networks to one another over an untrusted network (typically the public internet). Traffic is encrypted while traveling over the untrusted network to prevent eavesdropping or other attacks. VPNs can enable networks to safely and securely share sensitive information.</p> 
+      <h5>VPN Gateway</h5>
+      <p> VPN gateway is a type of virtual network gateway. Azure VPN Gateway instances are deployed in a dedicated subnet of the virtual network and enable the following connectivity:</p>
+      <ul>
+        <li>Connect on-premises datacenters to virtual networks through a site-to-site connection.</li>
+        <li>Connect individual devices to virtual networks through a point-to-site connection.</li>
+        <li>Connect virtual networks to other virtual networks through a network-to-network connection.</li>
+      </ul>
+      <p>All data transfer is encrypted inside a private tunnel as it crosses the internet. You can deploy only one VPN gateway in each virtual network. However, you can use one gateway to connect to multiple locations, which includes other virtual networks or on-premises datacenters.</p>
+      <p>When setting up a VPN gateway, you must specify the type of VPN - either policy-based or route-based. The primary distinction between these two types is how they determine which traffic needs encryption. In Azure, regardless of the VPN type, the method of authentication employed is a preshared key.</p>
+      <ul>
+        <li>Policy-based VPN gateways specify statically the IP address of packets that should be encrypted through each tunnel. This type of device evaluates every data packet against those sets of IP addresses to choose the tunnel where that packet is going to be sent through.</li>
+        <li>In Route-based gateways, IPSec tunnels are modeled as a network interface or virtual tunnel interface. IP routing (either static routes or dynamic routing protocols) decides which one of these tunnel interfaces to use when sending each packet. Route-based VPNs are the preferred connection method for on-premises devices. They're more resilient to topology changes such as the creation of new subnets.</li>
+      </ul>
+      <p>Use a route-based VPN gateway if you need any of the following types of connectivity:</p>
+      <ul>
+        <li>Connections between virtual networks</li>
+        <li>Point-to-site connections</li>
+        <li>Multisite connections</li>
+        <li>Coexistence with an Azure ExpressRoute gateway</li>
+      </ul>
+      <h2>High-availability scenarios</h2>
+      <h5>Active/standby</h5>
+      <p>By default, VPN gateways are deployed as two instances in an active/standby configuration, even if you only see one VPN gateway resource in Azure. When planned maintenance or unplanned disruption affects the active instance, the standby instance automatically assumes responsibility for connections without any user intervention. Connections are interrupted during this failover, but they typically restore within a few seconds for planned maintenance and within 90 seconds for unplanned disruptions.</p>
+      <h5>Active/active</h5>
+      <p>With the introduction of support for the BGP routing protocol, you can also deploy VPN gateways in an active/active configuration. In this configuration, you assign a unique public IP address to each instance. You then create separate tunnels from the on-premises device to each IP address. You can extend the high availability by deploying an additional VPN device on-premises.</p>
+      <h5>ExpressRoute failover</h5>
+      <p>Another high-availability option is to configure a VPN gateway as a secure failover path for ExpressRoute connections. ExpressRoute circuits have resiliency built in. However, they aren't immune to physical problems that affect the cables delivering connectivity or outages that affect the complete ExpressRoute location. In high-availability scenarios, where there's risk associated with an outage of an ExpressRoute circuit, you can also provision a VPN gateway that uses the internet as an alternative method of connectivity. In this way, you can ensure there's always a connection to the virtual networks.</p>
+      <h5>Zone-redundant gateways</h5>
+      <p>In regions that support availability zones, VPN gateways and ExpressRoute gateways can be deployed in a zone-redundant configuration. This configuration brings resiliency, scalability, and higher availability to virtual network gateways. Deploying gateways in Azure availability zones physically and logically separates gateways within a region while protecting your on-premises network connectivity to Azure from zone-level failures. These gateways require different gateway stock keeping units (SKUs) and use Standard public IP addresses instead of Basic public IP addresses.</p>
+      <h2>ExpressRoute</h2>
+      <p>Azure ExpressRoute lets you extend your on-premises networks into the Microsoft cloud over a private connection, with the help of a connectivity provider. This connection is called an ExpressRoute Circuit. With ExpressRoute, you can establish connections to Microsoft cloud services, such as Microsoft Azure and Microsoft 365. onnectivity can be from an any-to-any (IP VPN) network, a point-to-point Ethernet network, or a virtual cross-connection through a connectivity provider at a colocation facility. ExpressRoute connections don't go over the public Internet. This setup allows ExpressRoute connections to offer more reliability, faster speeds, consistent latencies, and higher security than typical connections over the Internet.</p>
+      <h5>Features and benefits of ExpressRoute</h5>
+      <ul>
+        <li>Connectivity to Microsoft cloud services across all regions in the geopolitical region.</li>
+        <li>Global connectivity to Microsoft services across all regions with the ExpressRoute Global Reach.</li>
+        <li>Dynamic routing between your network and Microsoft via Border Gateway Protocol (BGP).</li>
+        <li>Built-in redundancy in every peering location for higher reliability.</li>
+      </ul>
+      <h5>Global Connectivity</h5>
+      <p>You can enable ExpressRoute Global Reach to exchange data across your on-premises sites by connecting your ExpressRoute circuits.</p>
+      <h5>Dynamic Routing</h5>
+      <p>ExpressRoute uses the BGP. BGP is used to exchange routes between on-premises networks and resources running in Azure. This protocol enables dynamic routing between your on-premises network and services running in the Microsoft cloud.
       </p>
+      <h5>Built-in redundancy</h5>
+      <p>Each connectivity provider uses redundant devices to ensure that connections established with Microsoft are highly available. You can configure multiple circuits to complement this feature.</p>
+      <h5>ExpressRoute connectivity models</h5>
       <ul>
-        <li>Virtual machine scale sets let you create and manage a group of identical, load-balanced VMs. Scale sets allow you to centrally manage, configure, and update a large number of VMs in minutes. The number of VM instances can automatically increase or decrease in response to demand, or you can set it to scale based on a defined schedule. Virtual machine scale sets also automatically deploy a load balancer to make sure that your resources are being used efficiently. With virtual machine scale sets, you can build large-scale services for areas such as compute, big data, and container workloads.</li>
-        <li>Virtual machine availability sets are designed to ensure that VMs stagger updates and have varied power and network connectivity, preventing you from losing all your VMs with a single network or power failure. Availability accomplish these objectives by grouping VMs in two ways: update domain and fault domain.
-          <ul>
-            <li>Update domain: The update domain groups VMs that can be rebooted at the same time. This setup allows you to apply updates while knowing that only one update domain grouping is offline at a time. All of the machines in one update domain update. An update group going through the update process is given a 30-minute time to recover before maintenance on the next update domain starts.</li>
-            <li>Fault domain: The fault domain groups your VMs by common power source and network switch. By default, an availability set splits your VMs across up to three fault domains. This helps protect against a physical power or networking failure by having VMs in different fault domains (thus being connected to different power and networking resources).</li>
-          </ul>
-        </li>
+        <li>CloudExchange colocation: Colocation refers to your datacenter, office, or other facility being physically colocated at a cloud exchange, such as an ISP. If your facility is colocated at a cloud exchange, you can request a virtual cross-connect to the Microsoft cloud.</li>
+        <li>Point-to-point Ethernet connection: using a point-to-point connection to connect your facility to the Microsoft cloud.</li>
+        <li>With any-to-any connectivity, you can integrate your wide area network (WAN) with Azure by providing connections to your offices and datacenters. Azure integrates with your WAN connection to provide a connection like you would have between your datacenter and any branch offices.</li>
+        <li>You can connect directly into the Microsoft's global network at a peering location strategically distributed across the world. ExpressRoute Direct provides dual 100 Gbps or 10-Gbps connectivity, which supports Active/Active connectivity at scale.</li>
       </ul>
-      <p>Azure CLI Commands</p>
+      <h2>DNS</h2>
+      <p>Azure DNS is a hosting service for DNS domains that provides name resolution by using Microsoft Azure infrastructure.</p>
+      <p>Azure DNS uses the scope and scale of Microsoft Azure to provide numerous benefits, including:</p>
       <ul>
-        <li>To create a vm: az vm create</li>
-        <li>To configure vm: az vm extension set</li>
+        <li>DNS domains in Azure DNS are hosted on Azure's global network of DNS name servers, providing resiliency and high availability. Azure DNS uses anycast networking, so the closest available DNS server answers each DNS query, providing fast performance and high availability for your domain.</li>
+        <li>Security</li>
+        <li>Ease of Use</li>
+        <li>Customizable virtual networks</li>
+        <li>Alias records</li>
       </ul>
-      <!-- <p>Deploy currents projects to AWS</p>
-      <a class="button" href="aws/s3.html" target="_blank">AWS S3</a> -->
-      <h2>Azure virtual desktop</h2>
-      <p>Another type of virtual machine is the Azure Virtual Desktop. Azure Virtual Desktop is a desktop and application virtualization service that runs on the cloud. It enables you to use a cloud-hosted version of Windows from any location. </p>
-      <ul>
-        <li>Enhance security: Azure Virtual Desktop provides centralized security management for users' desktops with Microsoft Entra ID. You can enable multifactor authentication to secure user sign-ins. You can also secure access to data by assigning granular role-based access controls (RBACs) to users.
-
-        With Azure Virtual Desktop, the data and apps are separated from the local hardware. The actual desktop and apps are running in the cloud, meaning the risk of confidential data being left on a personal device is reduced. Additionally, user sessions are isolated in both single and multi-session environments.
-        </li>
-        <li>
-        Azure Virtual Desktop lets you use Windows 10 or Windows 11 Enterprise multi-session, the only Windows client-based operating system that enables multiple concurrent users on a single VM. Azure Virtual Desktop also provides a more consistent experience with broader application support compared to Windows Server-based operating systems.
-        </li>
-      </ul>
-      <h2>Azure containers</h2>
-      <p>If you want to run multiple instances of an application on a single host machine, containers are an excellent choice. Containers are a virtualization environment. Much like running multiple virtual machines on a single physical host, you can run multiple containers on a single physical or virtual host. Unlike virtual machines, you don't manage the operating system for a container. Virtual machines appear to be an instance of an operating system that you can connect to and manage. Containers are lightweight and designed to be created, scaled out, and stopped dynamically. It's possible to create and deploy virtual machines as application demand increases, but containers are a lighter weight, more agile method. </p>
-      <ul>
-        <li>Azure Container Instances offer the fastest and simplest way to run a container in Azure; without having to manage any virtual machines or adopt any additional services. Azure Container Instances are a platform as a service (PaaS) offering. </li>
-        <li>Azure Container Apps are similar in many ways to a container instance. They allow you to get up and running right away, they remove the container management piece, and they're a PaaS offering. Container Apps have extra benefits such as the ability to incorporate load balancing and scaling. </li>
-        <li>Azure Kubernetes Service (AKS) is a container orchestration service. An orchestration service manages the lifecycle of containers. When you're deploying a fleet of containers, AKS can make fleet management simpler and more efficient.</li>
-        <li>Containers are often used to create solutions by using a microservice architecture. This architecture is where you break solutions into smaller, independent pieces. For example, you might split a website into a container hosting your front end, another hosting your back end, and a third for storage. This split allows you to separate portions of your app into logical sections that can be maintained, scaled, or updated independently.</li>
-      </ul>
-      <h2>Azure functions</h2>
-      <p>Azure Functions is an event-driven, serverless compute option that doesn’t require maintaining virtual machines or containers. If you build an app using VMs or containers, those resources have to be “running” in order for your app to function. With Azure Functions, an event wakes the function, alleviating the need to keep resources provisioned when there are no events.</p>
-      <p>Using Azure Functions is ideal when you're only concerned about the code running your service and not about the underlying platform or infrastructure. Functions are commonly used when you need to perform work in response to an event (often via a REST request), timer, or message from another Azure service, and when that work can be completed quickly, within seconds or less. Azure Functions runs your code when it triggers and automatically deallocates resources when the function is finished. In this model, Azure only charges you for the CPU time used while your function runs. Functions can be either stateless or stateful. When they're stateless (the default), they behave as if they restart every time they respond to an event. When they're stateful (called Durable Functions), a context is passed through the function to track prior activity.</p>
-      <h1>Application hosting options</h1>
-      <h2>Azure App Service</h2>
-      <p>App Service enables you to build and host web apps, background jobs, mobile back-ends, and RESTful APIs in the programming language of your choice without managing infrastructure. It offers automatic scaling and high availability.</p>
     </div>
-
   </main>
 
   <footer>
