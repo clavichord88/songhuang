@@ -111,7 +111,7 @@
   }
 
   .project li {
-    text-indent: 4ch;
+    padding-left: 4ch;
   }
   
   @media (max-width: 600px) {
