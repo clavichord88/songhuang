@@ -35,9 +35,16 @@
         <li>This pretrained model then serves as a foundational resource that can be further refined through fine-tuning, a process where the model is specifically trained on a narrower dataset that is more specific to particular tasks or domains. </li>
       </ul>
       <img src="static/imgs/llmprocess.jpg" alt="LLM_process">
+      <p>The two most popular categories of fine-tuning LLMs are instruction fine-tuning and classification fine-tuning. </p>
+      <ul>
+        <li>In instruction fine-tuning, the labeled dataset consists of instruction and answer pairs, such as a query to translate a text accompanied by the correctly translated text.</li>
+        <li>In classification fine-tuning, the labeled dataset consists of texts and associated class labels—for example, emails associated with “spam” and “not spam” labels.</li>
+      </ul> 
+      <h5>Transformer Architecture</h5>
+      <p>The transformer architecture consists of two submodules: an encoder and a decoder. The encoder module processes the input text and encodes it into a series of numerical representations or vectors that capture the contextual information of the input. Then, the decoder module takes these encoded vectors and generates the output text. Both the encoder and decoder consist of many layers connected by a so-called self-attention mechanism, which allows the model to weigh the importance of different words or tokens in a sequence relative to each other. This mechanism enables the model to capture long-range dependencies and contextual relationships within the input data, enhancing its ability to generate coherent and contextually relevant output.</p>
+      <p>BERT (short for bidirectional encoder representations from transformers) which is built upon the original transformer’s encoder submodule, differs in its training approach from GPT (short for generative pretrained transformers). While GPT is designed for generative tasks, BERT and its variants specialize in masked word prediction, where the model predicts masked or hidden words in a given sentence. GPT, on the other hand, focuses on the decoder portion of the original transformer architecture and is designed for tasks that require generating texts. This includes machine translation, text summarization, fiction writing, writing computer code, and more.</p>
+      <img src="static/imgs/buildllm.jpg" alt="llm">
     </div>
-
-    
   </main>
 
   <footer>
